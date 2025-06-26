@@ -1,20 +1,16 @@
-// src/core/interceptors/tmdb.interceptor.ts
 import { HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
 import { environment } from '../../environments/environment';
-// import { environment } from '@/environments/environment';
 
-export const tmdbInterceptor: HttpInterceptorFn = (req, next) => {
-  const { baseUrl, apiKey, defaultLang } = environment.tmdb;
+export const TmdbInterceptor: HttpInterceptorFn = (req, next) => {
+  const isTmdb = req.url.startsWith(environment.tmdb.tmdbBaseUrl);
 
-  // Prepend baseUrl if caller passed a relative path like '/trending/movie/day'
-  const url = req.url.startsWith('http') ? req.url : `${baseUrl}${req.url}`;
+  if (!isTmdb) return next(req);
 
-  // Append api_key & language to query string
-  const authReq = req.clone({
-    url,
-    params: req.params.set('api_key', apiKey).set('language', defaultLang),
+  const cloned = req.clone({
+    setParams: {
+      api_key: environment.tmdb.tmdbApiKey,
+    },
   });
 
-  return next(authReq);
+  return next(cloned);
 };
