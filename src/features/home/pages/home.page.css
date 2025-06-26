@@ -1,0 +1,64 @@
+:host {
+  display: block;
+  padding: 1rem;
+  background: #0f1c24; /* dark backdrop */
+  font-family: "Inter", sans-serif; /* or your preferred font */
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ── Card ─────────────────────────────────────────── */
+.movie-card {
+  color: #fff;
+}
+
+.poster-wrapper {
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+.poster-wrapper img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Rating badge ─────────────────────────────────── */
+.rating {
+  position: absolute;
+  top: 0.4rem;
+  left: 0.4rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+}
+
+.rating.green  { background: #23d160; }
+.rating.orange { background: #ffdd57; }
+.rating.red    { background: #ff3860; }
+
+/* ── Text ─────────────────────────────────────────── */
+.title {
+  margin: 0.5rem 0 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.genres {
+  margin: 0;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}

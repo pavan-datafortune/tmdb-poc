@@ -1,0 +1,17 @@
+<div class="movies-grid">
+  <div class="movie-card" *ngFor="let movie of movies">
+    <!-- Poster + rating badge -->
+    <div class="poster-wrapper">
+      <img [src]="movie.poster" [alt]="movie.title" />
+      <span class="rating" [ngClass]="ratingColor(movie.rating)">
+        {{ movie.rating | number: '1.2-2' }}
+      </span>
+    </div>
+
+    <!-- Title -->
+    <h3 class="title" title="{{ movie.title }}">{{ movie.title }}</h3>
+
+    <!-- Genres -->
+    <p class="genres">{{ movie.genres.join(', ') }}</p>
+  </div>
+</div>
