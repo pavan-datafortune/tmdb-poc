@@ -1,6 +1,5 @@
 <div class="movies-grid">
-  <div class="movie-card" *ngFor="let movie of movies">
-    <!-- Poster + rating badge -->
+  <div class="movie-card" *ngFor="let movie of movieStore.moviesList()">
     <div class="poster-wrapper">
       <img
         [src]="'https://image.tmdb.org/t/p/w185' + movie.poster_path"
@@ -11,13 +10,10 @@
       </span>
     </div>
 
-    <!-- Title -->
     <h3 class="title" title="{{ movie.title }}">{{ movie.title }}</h3>
 
-    <!-- Genres -->
     <div style="display: flex; align-items: center">
       👍
-
       <p class="genres">{{ movie.vote_count}}</p>
     </div>
   </div>
