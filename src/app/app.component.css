@@ -1,6 +1,27 @@
 :host {
   display: block;
-  padding: 1rem;
-  width: 1200px;
   height: 100%;
+  width: 100%;
+}
+
+.page-body {
+  padding: 1rem;
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  justify-self: center;
+}
+
+.header {
+  background: #213455;
+  width: 100%;
+  color: #ffffff;
+}
+
+.title {
+  margin: 0;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 5px;
 }

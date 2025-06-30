@@ -1,0 +1,79 @@
+<div class="movie-detail">
+  <div class="poster-wrapper">
+    <img
+      *ngIf="movie?.poster_path"
+      class="poster"
+      [src]="'https://image.tmdb.org/t/p/w185' + movie?.poster_path"
+      [alt]="movie.title"
+    />
+    <span class="rating-badge">{{
+      movie.vote_average | number : "1.2-2"
+    }}</span>
+  </div>
+
+  <div class="info">
+    <div>
+      <h1>{{ movie?.title }}</h1>
+      <p>{{ movie?.tagline }}</p>
+    </div>
+
+    <div class="label">OVERVIEW:</div>
+    <p class="overview">{{ movie?.overview }}</p>
+
+    <div class="meta">
+      <div class="key-points">
+        <span class="label">RELEASE&nbsp;DATE:</span>
+        <span>{{ movie?.release_date }}</span>
+      </div>
+      <div class="key-points">
+        <span class="label">BUDGET:</span>
+        <span>$ {{ movie?.budget | numberSpace }}</span>
+      </div>
+      <div class="key-points">
+        <span class="label">REVENUE:</span>
+        <span>$ {{ movie?.revenue | numberSpace }}</span>
+      </div>
+      <div class="key-points">
+        <span class="label">DURATION:</span>
+        <span>{{ movie?.runtime | durationFormat }}&nbsp;min</span>
+      </div>
+    </div>
+
+    <div class="genres">
+      <span class="genre-chip" *ngFor="let g of movie?.genres">{{
+        g.name
+      }}</span>
+    </div>
+  </div>
+</div>
+
+<section class="cast-section" *ngIf="castWithPhotos.length">
+  <div style="display: flex; justify-content: space-between">
+    <h2>Top Billed Cast</h2>
+    <button
+      *ngIf="castWithPhotos.length > 12"
+      class="show-more"
+      (click)="toggleCast()"
+    >
+      {{ showAllCast ? "Show Less" : "Show More" }}
+    </button>
+  </div>
+
+  <div class="cast-list">
+    <div
+      class="cast-card"
+      *ngFor="
+        let cast of showAllCast
+          ? castWithPhotos
+          : (castWithPhotos | slice : 0 : 12)
+      "
+    >
+      <img
+        [src]="'https://image.tmdb.org/t/p/w185' + cast.profile_path"
+        [alt]="cast.name"
+      />
+      <strong>{{ cast.name }}</strong>
+      <small>{{ cast.character }}</small>
+    </div>
+  </div>
+</section>

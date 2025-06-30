@@ -9,6 +9,7 @@ export const TmdbInterceptor: HttpInterceptorFn = (req, next) => {
   const cloned = req.clone({
     setParams: {
       api_key: environment.tmdb.tmdbApiKey,
+      language: environment.tmdb.defaultLang,
     },
   });
 
