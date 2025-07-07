@@ -6,4 +6,5 @@ export const environment = {
     defaultLang: 'en-US',
   },
   tmdbV4Token: 'your_v4_bearer_token_here',
+  redirectUrl: 'http://localhost:4200/callback',
 };

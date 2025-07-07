@@ -1,0 +1,47 @@
+<div class="home-page">
+  <form [formGroup]="filterForm" class="form">
+    <select formControlName="category" class="custom-select">
+      <option value="popular">Popular</option>
+      <option value="top_rated">Top Rated</option>
+      <option value="upcoming">Upcoming</option>
+      <option value="favorites">Favorites</option>
+    </select>
+
+    <input
+      type="text"
+      formControlName="query"
+      placeholder="Search movies..."
+      class="search-bar"
+    />
+  </form>
+
+  <div
+    style="color: white; display: flex; align-content: center"
+    *ngIf="movieStore.isLoading()"
+  >
+    Loading....
+  </div>
+
+  <div [hidden]="movieStore.isLoading()">
+    <div class="movies-flex">
+      <movie-card
+        *ngFor="let movie of movieStore.moviesList()"
+        [movie]="movie"
+        (favorite)="movieStore.toggleFavorite(movie.id, !movie.isFavorite)"
+      ></movie-card>
+    </div>
+
+    <div class="footer">
+      <button
+        class="button"
+        (click)="previousPage()"
+        [disabled]="movieStore.currentPage() === 1"
+      >
+        ◀ Prev
+      </button>
+
+      <div class="page-number">Page {{movieStore.currentPage()}}</div>
+      <button class="button" (click)="nextPage()">Next ▶</button>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,20 @@
-<div>
+<div class="main-page">
   <div class="header">
     <p class="title">TMDB FLIX</p>
+
+    <div class="more-info">
+      <div *ngIf="auth.currentUserName">
+        {{ auth.currentUserName() }}
+      </div>
+      <button *ngIf="showLogout" class="" (click)="auth.logout()">
+        Logout
+      </button>
+    </div>
   </div>
-  <div class="page-body">
-    <router-outlet />
+
+  <div class="page-block">
+    <div class="page-body">
+      <router-outlet />
+    </div>
   </div>
 </div>

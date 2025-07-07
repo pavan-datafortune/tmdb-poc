@@ -1,8 +1,12 @@
 import { Routes } from '@angular/router';
-import { MovieCardsComponent } from '../features/home/pages/home.page';
+import { MoviesPageComponent } from '../features/movies-list/movies.page';
+import { LoginComponent } from '../features/login/login.component';
 
 export const appRoutes: Routes = [
-  { path: 'home', component: MovieCardsComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+
+  { path: 'movies', component: MoviesPageComponent },
   {
     path: 'movie-detail/:movieId',
     loadComponent: () =>
@@ -10,5 +14,26 @@ export const appRoutes: Routes = [
         (comp) => comp.MovieDetailComponent
       ),
   },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('../features/login/login.component').then((m) => m.LoginComponent),
+  },
+  {
+    path: 'callback',
+    loadComponent: () =>
+      import('../features/login/callback.component').then(
+        (m) => m.CallbackComponent
+      ),
+  },
+  {
+    path: 'favorites',
+    loadComponent: () =>
+      import('../features/favorites/favorites.component').then(
+        (m) => m.FavoritesComponent
+      ),
+  },
+
+  { path: '**', redirectTo: '' },
 ];

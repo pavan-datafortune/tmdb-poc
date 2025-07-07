@@ -1,0 +1,36 @@
+<div class="movie-card">
+  <div class="poster-wrapper" role="link" tabindex="0">
+    <img
+      [routerLink]="['/movie-detail', movie.id]"
+      [src]="'https://image.tmdb.org/t/p/w185' + movie.poster_path"
+      [alt]="movie.title"
+    />
+
+    <div>
+      <span class="rating" [ngClass]="ratingColor(movie.vote_average)">
+        {{ movie.vote_average | number : "1.2-2" }}
+      </span>
+
+      <div class="favorite" (click)="favorite.emit(movie)">
+        {{ movie.isFavorite ? "❤️" : "🤍" }}
+      </div>
+    </div>
+  </div>
+
+  <h3
+    class="title"
+    *ngIf="movie.title; else movieName"
+    title="{{ movie.title }}"
+  >
+    {{ movie.title }}
+  </h3>
+  <ng-template #movieName>
+    <h3 class="title" title="{{ movie.name }}">{{ movie.name }}</h3>
+  </ng-template>
+
+  <div class="genres">
+    <span *ngFor="let genre of movie.genres; let last = last">
+      {{ genre.name }}<span *ngIf="!last">, </span>
+    </span>
+  </div>
+</div>

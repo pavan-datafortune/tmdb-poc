@@ -1,18 +1,29 @@
 :host {
   display: block;
-  height: 100%;
+  width: 100%;
+}
+
+.main-page {
+  height: 100vmin;
+}
+
+.page-block {
+  display: block;
+  justify-self: center;
+  padding-block: 1rem;
+  max-width: 1200px;
   width: 100%;
 }
 
 .page-body {
-  padding: 1rem;
-  max-width: 1200px;
-  width: 100%;
   display: flex;
-  justify-self: center;
+  justify-content: center;
 }
 
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background: #213455;
   width: 100%;
   color: #ffffff;
@@ -20,8 +31,32 @@
 
 .title {
   margin: 0;
-  padding: 20px;
+  padding-block: 20px;
   font-size: 20px;
   font-weight: 600;
   letter-spacing: 5px;
+  margin-left: 20px;
+}
+
+.more-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-right: 20px;
+}
+
+button {
+  background-color: #fff;
+  padding-inline: 20px;
+  padding-block: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f1c24;
+}
+
+button:hover {
+  background-color: #0f1c24;
+  color: #ffffff;
+  border: 1px solid #ffffff;
 }
