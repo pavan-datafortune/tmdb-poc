@@ -27,13 +27,6 @@ export const appRoutes: Routes = [
         (m) => m.CallbackComponent
       ),
   },
-  {
-    path: 'favorites',
-    loadComponent: () =>
-      import('../features/favorites/favorites.component').then(
-        (m) => m.FavoritesComponent
-      ),
-  },
 
   { path: '**', redirectTo: '' },
 ];

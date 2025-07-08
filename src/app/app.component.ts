@@ -21,7 +21,9 @@ export class AppComponent implements OnInit {
   showLogout = false;
 
   ngOnInit() {
-    this.auth.getAccountInfo(this.auth.sessionId);
+    if (this.auth.sessionId) {
+      this.auth.getAccountInfo(this.auth.sessionId);
+    }
 
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))

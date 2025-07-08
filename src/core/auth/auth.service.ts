@@ -2,7 +2,7 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -12,7 +12,7 @@ export class TmdbAuthService {
   private http = inject(HttpClient);
   private apiKey = environment.tmdb.tmdbApiKey;
   private username = signal<string>('');
-  private userId = signal<string>('');
+  private userId = signal<number>(0);
 
   currentUserName = this.username.asReadonly();
   currentUserId = this.userId.asReadonly();
@@ -27,7 +27,7 @@ export class TmdbAuthService {
         const url =
           `https://www.themoviedb.org/authenticate/${token}` +
           `?redirect_to=${encodeURIComponent(environment.redirectUrl)}`;
-        window.location.href = url; // redirect to TMDB
+        window.location.href = url;
       });
   }
 
@@ -59,6 +59,8 @@ export class TmdbAuthService {
 
   logout() {
     localStorage.removeItem('tmdb_session_id');
+    this.userId.set(0);
+    this.username.set('');
     this.router.navigate(['/login']);
   }
 }
