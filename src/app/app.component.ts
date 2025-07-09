@@ -31,4 +31,8 @@ export class AppComponent implements OnInit {
         this.showLogout = event.urlAfterRedirects !== '/login';
       });
   }
+
+  gotoHomePage() {
+    this.router.navigate(['/movies']);
+  }
 }
