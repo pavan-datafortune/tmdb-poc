@@ -16,10 +16,15 @@
   </form>
 
   <div
-    style="color: white; display: flex; align-content: center"
+    style="
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 500px;
+    "
     *ngIf="movieStore.isLoading()"
   >
-    Loading....
+    <div class="spinner"></div>
   </div>
 
   <div [hidden]="movieStore.isLoading()">

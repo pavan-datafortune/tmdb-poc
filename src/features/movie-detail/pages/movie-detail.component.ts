@@ -36,8 +36,8 @@ export class MovieDetailComponent {
     this.route.paramMap
       .pipe(
         map((p) => p.get('movieId')),
-        filter(Boolean),
-        distinctUntilChanged(),
+        // filter(Boolean),
+        // distinctUntilChanged(),
         tap(() => {
           this.loading = true;
           this.error = null;

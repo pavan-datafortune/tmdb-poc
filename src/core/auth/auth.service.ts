@@ -13,6 +13,9 @@ export class TmdbAuthService {
   private apiKey = environment.tmdb.tmdbApiKey;
   private username = signal<string>('');
   private userId = signal<number>(0);
+  private isAuthenticated = signal<boolean>(
+    !!localStorage.getItem('tmdb_session_id')
+  );
 
   currentUserName = this.username.asReadonly();
   currentUserId = this.userId.asReadonly();
@@ -32,12 +35,16 @@ export class TmdbAuthService {
   }
 
   exchangeTokenForSession(token: string): Observable<string> {
-    return this.http
+    const session_id = this.http
       .post<any>(
         `https://api.themoviedb.org/3/authentication/session/new?api_key=${this.apiKey}`,
         { request_token: token }
       )
       .pipe(map((r) => r.session_id as string));
+
+    this.isAuthenticated.set(true);
+
+    return session_id;
   }
 
   getAccountInfo(sessionId: any) {
@@ -57,8 +64,13 @@ export class TmdbAuthService {
     return localStorage.getItem('tmdb_session_id');
   }
 
+  isLoggedIn(): boolean {
+    return this.isAuthenticated();
+  }
+
   logout() {
     localStorage.removeItem('tmdb_session_id');
+    this.isAuthenticated.set(false);
     this.userId.set(0);
     this.username.set('');
     this.router.navigate(['/login']);

@@ -1,108 +1,121 @@
-<div class="movie-detail">
-  <div class="poster-wrapper">
-    <img
-      *ngIf="movieDetails?.poster_path"
-      class="poster"
-      [src]="'https://image.tmdb.org/t/p/w500' + movieDetails?.poster_path"
-      [alt]="movieDetails.title"
-    />
-    <span class="rating-badge">{{
-      movieDetails?.vote_average | number : "1.2-2"
-    }}</span>
-  </div>
-
-  <div class="info">
-    <div>
-      <h1>{{ movieDetails?.title }}</h1>
-      <p>{{ movieDetails?.tagline }}</p>
-    </div>
-
-    <div class="label">OVERVIEW:</div>
-    <p class="overview">{{ movieDetails?.overview }}</p>
-
-    <div class="meta">
-      <div class="key-points">
-        <span class="label">RELEASE&nbsp;DATE:</span>
-        <span>{{ movieDetails?.release_date }}</span>
-      </div>
-      <div class="key-points">
-        <span class="label">BUDGET:</span>
-        <span>$ {{ movieDetails?.budget | numberSpace }}</span>
-      </div>
-      <div class="key-points">
-        <span class="label">REVENUE:</span>
-        <span>$ {{ movieDetails?.revenue | numberSpace }}</span>
-      </div>
-      <div class="key-points">
-        <span class="label">DURATION:</span>
-        <span>{{ movieDetails?.runtime | durationFormat }}&nbsp;min</span>
-      </div>
-    </div>
-
-    <div class="genres">
-      <span class="genre-chip" *ngFor="let g of movieDetails?.genres">{{
-        g.name
+<div
+  style="
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+  "
+  *ngIf="this.loading; else detail"
+>
+  <div class="spinner"></div>
+</div>
+<ng-template #detail>
+  <div class="movie-detail">
+    <div class="poster-wrapper">
+      <img
+        *ngIf="movieDetails?.poster_path"
+        class="poster"
+        [src]="'https://image.tmdb.org/t/p/w500' + movieDetails?.poster_path"
+        [alt]="movieDetails.title"
+      />
+      <span class="rating-badge">{{
+        movieDetails?.vote_average | number : "1.2-2"
       }}</span>
     </div>
-  </div>
-</div>
 
-<section class="cast-section" *ngIf="castWithPhotos.length">
-  <div style="display: flex; justify-content: space-between">
-    <h2>Top Billed Cast</h2>
-    <button
-      *ngIf="castWithPhotos.length > 12"
-      class="show-more"
-      (click)="toggleCast()"
-    >
-      {{ showAllCast ? "Show Less" : "Show More" }}
-    </button>
-  </div>
+    <div class="info">
+      <div>
+        <h1>{{ movieDetails?.title }}</h1>
+        <p>{{ movieDetails?.tagline }}</p>
+      </div>
 
-  <div class="cast-list">
-    <div
-      class="cast-card"
-      *ngFor="
-        let cast of showAllCast
-          ? castWithPhotos
-          : (castWithPhotos | slice : 0 : 12)
-      "
-    >
-      <img
-        [src]="'https://image.tmdb.org/t/p/w185' + cast.profile_path"
-        [alt]="cast.name"
-      />
-      <strong>{{ cast.name }}</strong>
-      <small>{{ cast.character }}</small>
+      <div class="label">OVERVIEW:</div>
+      <p class="overview">{{ movieDetails?.overview }}</p>
+
+      <div class="meta">
+        <div class="key-points">
+          <span class="label">RELEASE&nbsp;DATE:</span>
+          <span>{{ movieDetails?.release_date }}</span>
+        </div>
+        <div class="key-points">
+          <span class="label">BUDGET:</span>
+          <span>$ {{ movieDetails?.budget | numberSpace }}</span>
+        </div>
+        <div class="key-points">
+          <span class="label">REVENUE:</span>
+          <span>$ {{ movieDetails?.revenue | numberSpace }}</span>
+        </div>
+        <div class="key-points">
+          <span class="label">DURATION:</span>
+          <span>{{ movieDetails?.runtime | durationFormat }}&nbsp;min</span>
+        </div>
+      </div>
+
+      <div class="genres">
+        <span class="genre-chip" *ngFor="let g of movieDetails?.genres">{{
+          g.name
+        }}</span>
+      </div>
     </div>
   </div>
-</section>
 
-<section
-  class="cast-section"
-  style="margin-block: 50px"
-  *ngIf="recommendationList.length"
->
-  <div style="display: flex; justify-content: space-between">
-    <h2>Recommendations</h2>
-    <button
-      *ngIf="recommendationList.length > 10"
-      class="show-more"
-      (click)="toggleRecommendationList()"
-    >
-      {{ showRecommendations ? "Show Less" : "Show More" }}
-    </button>
-  </div>
+  <section class="cast-section" *ngIf="castWithPhotos.length">
+    <div style="display: flex; justify-content: space-between">
+      <h2>Top Billed Cast</h2>
+      <button
+        *ngIf="castWithPhotos.length > 12"
+        class="show-more"
+        (click)="toggleCast()"
+      >
+        {{ showAllCast ? "Show Less" : "Show More" }}
+      </button>
+    </div>
 
-  <div class="cast-list">
-    <movie-card
-      *ngFor="
-        let movie of showRecommendations
-          ? recommendationList
-          : (recommendationList | slice : 0 : 10)
-      "
-      [movie]="movie"
-      (favorite)="movieStore.toggleFavorite(movie.id, !movie.isFavorite)"
-    ></movie-card>
-  </div>
-</section>
+    <div class="cast-list">
+      <div
+        class="cast-card"
+        *ngFor="
+          let cast of showAllCast
+            ? castWithPhotos
+            : (castWithPhotos | slice : 0 : 12)
+        "
+      >
+        <img
+          [src]="'https://image.tmdb.org/t/p/w185' + cast.profile_path"
+          [alt]="cast.name"
+        />
+        <strong>{{ cast.name }}</strong>
+        <small>{{ cast.character }}</small>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="cast-section"
+    style="margin-block: 50px"
+    *ngIf="recommendationList.length"
+  >
+    <div style="display: flex; justify-content: space-between">
+      <h2>Recommendations</h2>
+      <button
+        *ngIf="recommendationList.length > 10"
+        class="show-more"
+        (click)="toggleRecommendationList()"
+      >
+        {{ showRecommendations ? "Show Less" : "Show More" }}
+      </button>
+    </div>
+
+    <div class="cast-list">
+      <movie-card
+        *ngFor="
+          let movie of showRecommendations
+            ? recommendationList
+            : (recommendationList | slice : 0 : 10)
+        "
+        [movie]="movie"
+        (favorite)="movieStore.toggleFavorite(movie.id, !movie.isFavorite)"
+      ></movie-card>
+    </div>
+  </section>
+</ng-template>

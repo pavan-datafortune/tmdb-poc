@@ -7,7 +7,16 @@ import { TmdbAuthService } from '../../core/auth/auth.service';
   standalone: true,
   selector: 'app-callback',
   imports: [CommonModule],
-  template: `<p style="padding:2rem;color:white">Finishing login…</p>`,
+  template: ` <div
+    style="
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+  "
+  >
+    <div class="spinner"></div>
+  </div>`,
 })
 export class CallbackComponent implements OnInit {
   private route = inject(ActivatedRoute);
@@ -23,8 +32,8 @@ export class CallbackComponent implements OnInit {
 
     this.auth.exchangeTokenForSession(token).subscribe({
       next: (sessionId) => {
-        this.auth.getAccountInfo(sessionId);
         this.auth.saveSession(sessionId);
+        this.auth.getAccountInfo(sessionId);
         this.router.navigate(['/movies']);
       },
       error: () => {
