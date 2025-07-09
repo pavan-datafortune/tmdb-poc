@@ -6,7 +6,7 @@ import { DurationFormatPipe } from '../../../shared/pipe/duration-format.pipe';
 import { CommonModule } from '@angular/common';
 import { MovieCardComponent } from '../../../shared/components/movie-card/movie-card.component';
 import { Genre, Movie, MoviesStore } from '../../movies-list/movies.store';
-import { distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -36,8 +36,6 @@ export class MovieDetailComponent {
     this.route.paramMap
       .pipe(
         map((p) => p.get('movieId')),
-        // filter(Boolean),
-        // distinctUntilChanged(),
         tap(() => {
           this.loading = true;
           this.error = null;

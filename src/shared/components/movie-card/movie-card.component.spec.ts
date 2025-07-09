@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MovieCardComponent } from './movie-card.component';
 
 describe('MovieCardComponent', () => {
@@ -8,9 +7,8 @@ describe('MovieCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MovieCardComponent]
-    })
-    .compileComponents();
+      imports: [MovieCardComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MovieCardComponent);
     component = fixture.componentInstance;
