@@ -1,0 +1,30 @@
+.mat-mdc-slider {
+  max-width: 300px;
+  width: 100%;
+  align-self: center;
+}
+
+.mat-mdc-card + .mat-mdc-card {
+  margin-top: 8px;
+}
+
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  padding: 10px;
+}
+
+.example-margin {
+  margin: 8px;
+}
+
+.example-label-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.example-name-label .example-value-label {
+  font-weight: 600;
+}

@@ -73,8 +73,36 @@
       padding: 0.25rem 0.75rem;
       border-radius: 14px;
       font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: 500;
     }
+  }
+
+  .ratebutton {
+    display: inline;
+    background: #213455;
+    padding: 10px;
+    border: 0;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+  }
+
+  .ratebutton:hover {
+    font-weight: 500;
+    background: #ffffff;
+    color: #213455;
+  }
+
+  .user-rating {
+    display: inline;
+    background: #213455;
+    padding: 10px;
+    border: 0;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
   }
 
   .trailers {

@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { TmdbApiService } from '../../core/tmdb.http/tmdb.http.service';
-import { map, Observable, switchMap, tap } from 'rxjs';
+import { map, Observable, Subject, switchMap, tap } from 'rxjs';
 
 export interface Genre {
   id: number;
@@ -29,6 +29,13 @@ export interface Movie {
 export class MoviesStore {
   tmdbApi = inject(TmdbApiService);
   private genreMap: Record<number, string> = {};
+
+  private ratingChangedSubject = new Subject<{
+    movieId: number;
+    rating: number | null;
+  }>();
+
+  ratingChanged$ = this.ratingChangedSubject.asObservable();
 
   private movies = signal<Movie[]>([]);
   private loading = signal(false);
@@ -61,6 +68,10 @@ export class MoviesStore {
       },
       error: () => this.error.set('Favourite update failed'),
     });
+  }
+
+  emitRatingChange(movieId: number, rating: number | null) {
+    this.ratingChangedSubject.next({ movieId, rating });
   }
 
   loadMovies(

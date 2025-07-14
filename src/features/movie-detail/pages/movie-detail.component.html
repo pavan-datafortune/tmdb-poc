@@ -56,6 +56,15 @@
           g.name
         }}</span>
       </div>
+
+      <div (click)="openRatingDialog(movieDetails)">
+        <div class="user-rating" *ngIf="userRating; else showRateButton">
+          ⭐ {{ userRating }}
+        </div>
+        <ng-template #showRateButton>
+          <div class="ratebutton">Rate Now</div>
+        </ng-template>
+      </div>
     </div>
   </div>
 

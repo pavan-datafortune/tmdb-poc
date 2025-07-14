@@ -92,4 +92,29 @@ export class TmdbApiService {
       { params }
     );
   }
+
+  rateMovie(movieId: number, rating: number): Observable<any> {
+    const url = `${this.base}/movie/${movieId}/rating`;
+    return this.http.post(
+      url,
+      { value: rating },
+      {
+        params: { session_id: this.auth.sessionId!.toString() },
+      }
+    );
+  }
+
+  removeRating(movieId: number): Observable<any> {
+    const url = `${this.base}/movie/${movieId}/rating`;
+    return this.http.delete(url, {
+      params: { session_id: this.auth.sessionId!.toString() },
+    });
+  }
+
+  getUserAccountStates(movieId: number): Observable<{ rated: any }> {
+    const url = `${this.base}/movie/${movieId}/account_states`;
+    return this.http.get<{ rated: any }>(url, {
+      params: { session_id: this.auth.sessionId!.toString() },
+    });
+  }
 }

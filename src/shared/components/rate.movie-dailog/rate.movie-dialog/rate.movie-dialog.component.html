@@ -1,0 +1,34 @@
+<div class="modal-container">
+  <h2 mat-dialog-title>Rate "{{ data.title }}"</h2>
+
+  <div class="example-label-container">
+    <label id="example-name-label" class="example-name-label">Rating</label>
+    <label class="example-value-label">⭐ {{ slider.value }}</label>
+  </div>
+
+  <mat-slider
+    class="example-margin"
+    [disabled]="disabled"
+    [max]="max"
+    [min]="min"
+    [step]="step"
+    [discrete]="thumbLabel"
+    [showTickMarks]="showTicks"
+  >
+    <input matSliderThumb [(ngModel)]="value" #slider />
+  </mat-slider>
+
+  <div mat-dialog-actions>
+    <div *ngIf="showDeleteButton; else showCloseBtn">
+      <button mat-button (click)="remove()" style="color: red">Delete</button>
+    </div>
+
+    <ng-template #showCloseBtn>
+      <button mat-button (click)="close()">Close</button>
+    </ng-template>
+
+    <button mat-button (click)="submit()" [disabled]="value === 0">
+      {{ showDeleteButton ? "Update" : "Submit" }}
+    </button>
+  </div>
+</div>
