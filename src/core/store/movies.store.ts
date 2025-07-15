@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { TmdbApiService } from '../../core/tmdb.http/tmdb.http.service';
+import { TmdbApiService } from '../tmdb.http/tmdb.http.service';
 import { map, Observable, Subject, switchMap, tap } from 'rxjs';
 
 export interface Genre {

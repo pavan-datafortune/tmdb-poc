@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { MoviesStore } from '../features/movies-list/movies.store';
+import { MoviesStore } from '../core/store/movies.store';
 import { filter } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { TmdbAuthService } from '../core/auth/auth.service';

@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map, Observable } from 'rxjs';
 import { TmdbAuthService } from '../auth/auth.service';
-import { Genre } from '../../features/movies-list/movies.store';
+import { Genre } from '../store/movies.store';
 
 @Injectable({ providedIn: 'root' })
 export class TmdbApiService {

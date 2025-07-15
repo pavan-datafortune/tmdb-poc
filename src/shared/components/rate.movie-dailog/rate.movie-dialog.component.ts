@@ -6,7 +6,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { TmdbApiService } from '../../../core/tmdb.http/tmdb.http.service';
-import { MoviesStore } from '../../../features/movies-list/movies.store';
+import { MoviesStore } from '../../../core/store/movies.store';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';

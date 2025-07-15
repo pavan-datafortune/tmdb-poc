@@ -9,7 +9,7 @@ import {
   startWith,
 } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MoviesStore } from './movies.store';
+import { MoviesStore } from '../../core/store/movies.store';
 import { MovieCardComponent } from '../../shared/components/movie-card/movie-card.component';
 
 @Component({
