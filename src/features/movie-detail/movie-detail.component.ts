@@ -1,15 +1,15 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TmdbApiService } from '../../../core/tmdb.http/tmdb.http.service';
-import { NumberSpacePipe } from '../../../shared/pipe/number-space.pipe';
-import { DurationFormatPipe } from '../../../shared/pipe/duration-format.pipe';
+import { TmdbApiService } from '../../core/tmdb.http/tmdb.http.service';
+import { NumberSpacePipe } from '../../shared/pipe/number-space.pipe';
+import { DurationFormatPipe } from '../../shared/pipe/duration-format.pipe';
 import { CommonModule } from '@angular/common';
-import { MovieCardComponent } from '../../../shared/components/movie-card/movie-card.component';
-import { Genre, Movie, MoviesStore } from '../../movies-list/movies.store';
+import { MovieCardComponent } from '../../shared/components/movie-card/movie-card.component';
+import { Genre, Movie, MoviesStore } from '../movies-list/movies.store';
 import { map, switchMap, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
-import { RateMovieDialog } from '../../../shared/components/rate.movie-dailog/rate.movie-dialog/rate.movie-dialog.component';
+import { RateMovieDialog } from '../../shared/components/rate.movie-dailog/rate.movie-dialog.component';
 
 @Component({
   selector: 'app-movie-detail',

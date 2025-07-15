@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 export class TmdbAuthService {
   private router = inject(Router);
   private http = inject(HttpClient);
-  private apiKey = environment.tmdb.tmdbApiKey;
   private username = signal<string>('');
   private userId = signal<number>(0);
   private isAuthenticated = signal<boolean>(
@@ -22,9 +21,7 @@ export class TmdbAuthService {
 
   startLoginFlow() {
     this.http
-      .get<any>(
-        `https://api.themoviedb.org/3/authentication/token/new?api_key=${this.apiKey}`
-      )
+      .get<any>(`https://api.themoviedb.org/3/authentication/token/new`)
       .subscribe((res) => {
         const token = res.request_token;
         const url =
@@ -36,10 +33,9 @@ export class TmdbAuthService {
 
   exchangeTokenForSession(token: string): Observable<string> {
     const session_id = this.http
-      .post<any>(
-        `https://api.themoviedb.org/3/authentication/session/new?api_key=${this.apiKey}`,
-        { request_token: token }
-      )
+      .post<any>(`https://api.themoviedb.org/3/authentication/session/new`, {
+        request_token: token,
+      })
       .pipe(map((r) => r.session_id as string));
 
     this.isAuthenticated.set(true);
@@ -48,7 +44,7 @@ export class TmdbAuthService {
   }
 
   getAccountInfo(sessionId: any) {
-    const url = `https://api.themoviedb.org/3/account?api_key=${this.apiKey}&session_id=${sessionId}`;
+    const url = `https://api.themoviedb.org/3/account?session_id=${sessionId}`;
 
     return this.http.get<any>(url).subscribe((res) => {
       this.username.set(res.username);

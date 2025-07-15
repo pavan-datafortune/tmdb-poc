@@ -16,7 +16,7 @@ export const appRoutes: Routes = [
   {
     path: 'movie-detail/:movieId',
     loadComponent: () =>
-      import('../features/movie-detail/pages/movie-detail.component').then(
+      import('../features/movie-detail/movie-detail.component').then(
         (comp) => comp.MovieDetailComponent
       ),
     canActivate: [AuthGuard],
