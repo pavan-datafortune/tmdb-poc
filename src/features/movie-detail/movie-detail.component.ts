@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TmdbApiService } from '../../core/tmdb.http/tmdb.http.service';
+import { TmdbApiService } from '../../core/tmdb.http/tmdb.api.service';
 import { NumberSpacePipe } from '../../shared/pipe/number-space.pipe';
 import { DurationFormatPipe } from '../../shared/pipe/duration-format.pipe';
 import { CommonModule } from '@angular/common';

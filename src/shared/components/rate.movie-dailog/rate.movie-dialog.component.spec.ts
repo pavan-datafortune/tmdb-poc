@@ -1,18 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RateMovieDialog } from './rate.movie-dialog.component';
 
-import { RateMovieDailogComponent } from './rate.movie-dialog.component';
-
-describe('RateMovieDailogComponent', () => {
-  let component: RateMovieDailogComponent;
-  let fixture: ComponentFixture<RateMovieDailogComponent>;
+describe('RateMovieDialog', () => {
+  let component: RateMovieDialog;
+  let fixture: ComponentFixture<RateMovieDialog>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RateMovieDailogComponent]
-    })
-    .compileComponents();
+      imports: [RateMovieDialog],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(RateMovieDailogComponent);
+    fixture = TestBed.createComponent(RateMovieDialog);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
