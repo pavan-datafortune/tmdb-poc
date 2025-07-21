@@ -3,7 +3,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
@@ -71,4 +71,37 @@ export class TmdbAuthService {
     this.username.set('');
     this.router.navigate(['/login']);
   }
+}
+
+export class MockTmdbAuthService {
+  private username = signal('MockUser');
+  private userId = signal(1);
+  private isAuthenticated = signal(true);
+
+  currentUserName = this.username.asReadonly();
+  currentUserId = this.userId.asReadonly();
+
+  startLoginFlow = jasmine.createSpy('startLoginFlow');
+
+  exchangeTokenForSession(token: string) {
+    return of('mock-session-id');
+  }
+
+  getAccountInfo(sessionId: string) {
+    return of({ username: 'MockUser', id: 1 });
+  }
+
+  saveSession(sessionId: string) {
+    localStorage.setItem('tmdb_session_id', sessionId);
+  }
+
+  get sessionId() {
+    return 'mock-session-id';
+  }
+
+  isLoggedIn(): boolean {
+    return this.isAuthenticated();
+  }
+
+  logout = jasmine.createSpy('logout');
 }

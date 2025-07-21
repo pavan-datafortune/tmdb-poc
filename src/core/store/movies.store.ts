@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { TmdbApiService } from '../tmdb.http/tmdb.api.service';
-import { map, Observable, Subject, switchMap, tap } from 'rxjs';
+import { map, Observable, of, Subject, switchMap, tap } from 'rxjs';
 
 export interface Genre {
   id: number;
@@ -142,4 +142,21 @@ export class MoviesStore {
       isFavorite: this.favIds().has(raw.id),
     };
   }
+}
+
+export class MockMoviesStore {
+  moviesList = signal<Movie[]>([]);
+  isLoading = signal(false);
+  currentPage = signal(1);
+  errorMessage = signal(null);
+  favouriteIds = signal(new Set());
+
+  ratingChanged$ = new Subject();
+
+  refreshFavorites = jasmine
+    .createSpy('refreshFavorites')
+    .and.returnValue(of(new Set()));
+  toggleFavorite = jasmine.createSpy('toggleFavorite');
+  emitRatingChange = jasmine.createSpy('emitRatingChange');
+  loadMovies = jasmine.createSpy('loadMovies');
 }

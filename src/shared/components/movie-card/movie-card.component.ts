@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 export class MovieCardComponent {
   @Input() movie: any;
 
-  @Output() favorite = new EventEmitter<number>();
+  @Output() favorite = new EventEmitter<any>();
 
   ratingColor(rating: number): 'green' | 'orange' | 'red' {
     if (rating >= 7) return 'green';

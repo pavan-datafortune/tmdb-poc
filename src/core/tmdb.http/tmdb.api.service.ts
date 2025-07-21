@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { TmdbAuthService } from '../auth/auth.service';
 import { Genre } from '../store/movies.store';
 
@@ -117,4 +117,29 @@ export class TmdbApiService {
       params: { session_id: this.auth.sessionId!.toString() },
     });
   }
+}
+
+export class MockTmdbApiService {
+  getPopularMovies = jasmine.createSpy().and.returnValue(of({ results: [] }));
+  getTopRatedMovies = jasmine.createSpy().and.returnValue(of({ results: [] }));
+  getUpcomingMovies = jasmine.createSpy().and.returnValue(of({ results: [] }));
+  getGenres = jasmine.createSpy().and.returnValue(of({ genres: [] }));
+  getMovieDetails = jasmine
+    .createSpy()
+    .and.returnValue(
+      of({ id: 1, title: 'Mock Movie', videos: {}, credits: {}, similar: {} })
+    );
+  getFavorites = jasmine.createSpy().and.returnValue(of([]));
+  setFavorite = jasmine.createSpy().and.returnValue(of({ success: true }));
+  rateMovie = jasmine.createSpy().and.returnValue(of({ success: true }));
+  removeRating = jasmine.createSpy().and.returnValue(of({ success: true }));
+  getUserAccountStates = jasmine
+    .createSpy()
+    .and.returnValue(of({ rated: null }));
+
+  // If needed for Auth references in the service
+  auth = {
+    currentUserId: 'mock-user-id',
+    sessionId: 'mock-session-id',
+  };
 }

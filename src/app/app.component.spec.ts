@@ -2,15 +2,18 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
-import { TmdbAuthService } from '../core/auth/auth.service';
-import { MoviesStore } from '../core/store/movies.store';
+import {
+  MockTmdbAuthService,
+  TmdbAuthService,
+} from '../core/auth/auth.service';
+import { MockMoviesStore, MoviesStore } from '../core/store/movies.store';
 
-fdescribe('AppComponent', () => {
+describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let component: AppComponent;
   let mockRouterEvents: Subject<any>;
-  let mockAuthService: jasmine.SpyObj<TmdbAuthService>;
-  let mockMovieStore: jasmine.SpyObj<MoviesStore>;
+  let mockAuthService: MockTmdbAuthService;
+  let mockMovieStore: MockMoviesStore;
 
   beforeEach(async () => {
     mockRouterEvents = new Subject<any>();
